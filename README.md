@@ -74,4 +74,6 @@ This is close to a real-world production workflow used by DevOps engineers.
 ```
 
 
+If something does not work or does not start, try to find the error and fix it, learn how to do it and solve errors, and you will never repeat it again.
 
+Good luck! 😊
