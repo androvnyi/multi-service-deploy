@@ -1,0 +1,11 @@
+---
+- hosts: prod
+  vars_files:
+    - vault/secrets.yml
+  roles:
+    - docker
+    - app
+    - nginx
+    - compose
+
+

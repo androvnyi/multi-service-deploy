@@ -1,0 +1,14 @@
+---
+- name: Create nginx folder under stack
+  become: yes
+  file:
+    path: /opt/stack/nginx
+    state: directory
+    mode: "0755"
+
+- name: Push nginx default.conf
+  become: yes
+  copy:
+    src: "{{ role_path }}/files/default.conf"
+    dest: /opt/stack/nginx/default.conf
+    mode: "0644"

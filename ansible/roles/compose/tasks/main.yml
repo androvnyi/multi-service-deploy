@@ -1,0 +1,37 @@
+---
+- name: Ensure stack root exists
+  become: yes
+  file:
+    path: /opt/stack
+    state: directory
+    mode: "0755"
+
+- name: Ensure app folder exists under stack
+  become: yes
+  file:
+    path: /opt/stack/app
+    state: directory
+    mode: "0755"
+
+- name: Sync app build context into stack
+  become: yes
+  copy:
+    src: /opt/app/
+    dest: /opt/stack/app/
+    remote_src: yes
+    mode: "0644"
+
+- name: Push docker-compose.yml (templated)
+  become: yes
+  template:
+    src: "{{ role_path }}/files/docker-compose.yml.j2"
+    dest: /opt/stack/docker-compose.yml
+    mode: "0644"
+
+- name: Build/pull and start stack
+  become: yes
+  community.docker.docker_compose_v2:
+    project_src: /opt/stack
+    state: present
+    build: always
+    pull: always

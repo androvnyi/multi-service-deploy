@@ -1,0 +1,31 @@
+---
+- name: Create app directory
+  become: yes
+  file:
+    path: /opt/app
+    state: directory
+    mode: "0755"
+
+- name: Push app files (app.py and requirements.txt)
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/app/{{ item | basename }}"
+    mode: "0644"
+  loop:
+    - "{{ role_path }}/files/app.py"
+    - "{{ role_path }}/files/requirements.txt"
+
+- name: Create Dockerfile for API
+  become: yes
+  copy:
+    dest: /opt/app/Dockerfile
+    mode: "0644"
+    content: |
+      FROM python:3.11-slim
+      WORKDIR /app
+      COPY requirements.txt .
+      RUN pip install --no-cache-dir -r requirements.txt
+      COPY app.py .
+      EXPOSE 8000
+      CMD ["python", "app.py"]

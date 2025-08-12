@@ -1,0 +1,11 @@
+ansible/vault/*.yml
+*.ssh
+*.pem
+*.retry
+*.log
+
+
+.vscode/
+.idea/
+*.swp
+
