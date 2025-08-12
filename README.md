@@ -49,7 +49,7 @@ This is close to a real-world production workflow used by DevOps engineers.
 ---
 
 ### Repository Structure
-
+```
  ansible/
 ├─ ansible.cfg
 ├─ inventory.ini
@@ -71,7 +71,7 @@ This is close to a real-world production workflow used by DevOps engineers.
    └─ compose/
       ├─ tasks/
       └─ files/ 
-
+```
 
 
 
